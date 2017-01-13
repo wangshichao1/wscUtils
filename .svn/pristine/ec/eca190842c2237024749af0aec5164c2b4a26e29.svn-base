@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsc.mapper.VgopFeedBackMapper">
+	<select id="getFeedBackNumByDateByPage" parameterType="VgopSendNumFeedBack" resultType="VgopSendNumFeedBack">
+		select t1.* from (select t.act_id,t.serial_number,t.update_time as ACT_SEND_TIME,t.update_time as SMS_SEND_TIME,t.touch_tag,'10086611' as ACT_CHANNEL,t.year,t.month,t.day,rownum rn 
+		from TF_SM_TOUCHSALE_NEW_NUMBER t
+		where t.year=#{year} and t.month=#{month} and t.day=#{day}) t1 where t1.rn between #{pageVo.startIndex} and #{pageVo.endIndex}
+	</select>
+	
+	<select id="getFeedBackNumByDate" parameterType="VgopSendNumFeedBack" resultType="VgopSendNumFeedBack">
+		select t.act_id,t.serial_number,t.update_time as ACT_SEND_TIME,t.update_time as SMS_SEND_TIME,t.touch_tag,'10086611' as ACT_CHANNEL,t.year,t.month,t.day,rownum rn 
+		from TF_SM_TOUCHSALE_NEW_NUMBER t
+		where t.year=#{year} and t.month=#{month} and t.day=#{day}
+	</select>
+	
+	<select id="countFeedBackNumByDate" parameterType="VgopSendNumFeedBack" resultType="int">
+		select count(*)
+		from TF_SM_TOUCHSALE_NEW_NUMBER t
+		where t.year=#{year} and t.month=#{month} and t.day=#{day}
+	</select>
+</mapper>

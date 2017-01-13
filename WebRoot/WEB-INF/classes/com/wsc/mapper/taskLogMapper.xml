@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsc.mapper.TaskLogMapper">
+	<insert id="saveLog" parameterType="taskLog">
+		insert into TF_SMS_VGOP_FEEDBACK_TASK_LOG(task_id,Task_Name,UPLOAD_FILE_LIST,UPLOAD_RESULT,FAILURE_DESC) values(to_char(sysdate,'yyyymmdd')||SEQ_VGOP_FEEDBACK_TASK_LOG.Nextval,'VGOP_FEEDBACK_TASK',#{upload_file_list},#{upload_result},#{failure_desc})
+	</insert>
+</mapper>
